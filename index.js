@@ -8,9 +8,9 @@ const ffmpeg = require("fluent-ffmpeg");
 const merge = ffmpeg();
 const dir = "./files";
 var ghj = 0;
-var fileList = [];
-var listFileName = "list.txt";
-var fileNames = "";
+// var fileList = [];
+// var listFileName = "list.txt";
+// var fileNames = "";
 
 var where = "https://www.shazam.com/charts/top-200/ukraine";
 var what = "div.artist";
