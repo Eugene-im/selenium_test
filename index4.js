@@ -1,5 +1,6 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
 const driver = new Builder().forBrowser("chrome").build();
+// const driver = new Builder().forBrowser("chrome").build();
 
 function getLinkVideoFull(){
 
