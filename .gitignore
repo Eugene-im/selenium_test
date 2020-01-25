@@ -1,6 +1,8 @@
 /node_modules
-/files
-/readyToUpload
+/files/*
+/readyToUpload/*
 *.log
 *.txt
 package-lock.json
+/readyToUpload/*
+/rtuv/*

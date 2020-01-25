@@ -13,7 +13,7 @@ function concatAudio() {
     merge
     .addInput('./img/1.jpg')
     .inputOption('-loop 1')
-    .addInput('./readyToUpload/mergedAudio.m4a')
+    .addInput('./readyToUpload/output.aac')
     .outputOption(["-c:v libx264","-c:a copy","-shortest"])
     .save(saveString)
     .on("error", function(err) {

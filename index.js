@@ -10,6 +10,7 @@ const dir = "./files";
 const dir2 = "./readyToUpload";
 const dir3 = "./img";
 var ghj = 0;
+var trq='';
 // var fileList = [];
 // var listFileName = "list.txt";
 // var fileNames = "";
@@ -24,6 +25,8 @@ var urlShortMusic = [];
 var urlImg = [];
 var temp = "";
 var temp2 = "";
+var ar1 = [],ar4 = {};
+
 
 function checkDir(d){
   if (!fs.existsSync(d)){
@@ -121,16 +124,15 @@ async function getClear50() {
     if (temp == "hide") break;
     // await good50.push(e);
     tracks.push(await e.getText());
+    trq = tracks.toString().replace(/[\n\r]/g," - ").replace(/,/g,',\n');
+
   }
   //   console.log(urls);
 }
 
-var ar1 = [],
-  ar2 = [],
-  ar3 = [];
-ar4 = {};
 
 async function sortCreate() {
+  // console.log(tracks)
   tracks.forEach(el => {
     ar1.push(el.split("\n"));
   });
@@ -151,32 +153,26 @@ async function sortCreate() {
   }, ar4);
   // console.log(ar4);
 }
-
-function cyclicDownload() {
+function cdownload(){
   var i = 0;
   var ast = "";
-
-  fs.readdir(dir, (err, files) => {
-      if (files.length != 0) {
-        files.forEach(file => {
-          fs.unlinkSync(dir + "/" + file);
-        });
-      }
-    }
-  )
-
-
   for (e in ar4) {
-    i = i + 1;
-    if (i < 10) {
-      ast = "0" + i;
-    }
-    if (i >= 10) {
-      ast = i;
-    }
+    i+=1;
+    ast = (i<10) ? "0" + i : i;
     download(ar4[e].urlShortMusic, dir + "/" + ast + ar4[e].urlShMusExt);
   }
 }
+function cyclicDownload() {
+  fs.readdir(dir, (err, files) => {
+      if (files.length != 0) {
+        files.forEach(file => fs.unlinkSync(dir + "/" + file));
+        cdownload();
+      } else {
+        cdownload()}
+    }
+  ) 
+}
+
 
 (async function example() {
   try {
@@ -186,7 +182,7 @@ function cyclicDownload() {
     await sortCreate();
     await cyclicDownload();
     // await concatAudio();
-    await fs.writeFile("new.txt",tracks,(err)=> {if (err) throw err; console.log('file is ok')})
+    await fs.writeFile("new.txt",trq,(err)=> {if (err) throw err; console.log('file is ok')})
     // tracks.forEach(element => {i+=1;item['it'+i]={"song":element};items['it'+i]=item['it'+i]});
     // console.log(JSON.stringify(items));
     // fs.writeFile("artists.txt",JSON.parse(items),(err)=> {if (err) throw err; console.log('file is ok')})
