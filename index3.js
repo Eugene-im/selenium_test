@@ -1,10 +1,9 @@
-
-const fs = require("fs");
+// const fs = require("fs");
 const ffmpeg = require("fluent-ffmpeg");
 const merge = ffmpeg();
-// var dateFormat = require('dateformat');
-// var asd = (new Date()).dateFormat(now, "mmmm yyyy");
-var saveString = "./rtuv/shazam world top50 jan 2020.mp4";
+var options = { year: 'numeric', month: 'long'};
+var today  = (new Date()).toLocaleDateString("en-US", options);
+var saveString = `./rtuv/shazam world top50 ${today}.mp4`;
 
 function concatAudio() {
   // read(dir,fileList,fileNames,listFileName);
